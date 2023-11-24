@@ -1,0 +1,16 @@
+﻿@{
+    var Departments = (List<Department>)ViewData["Departments"];
+    var Ideas = (List<NIdea>)ViewData["Ideas"];
+}
+
+<table class="table">
+    @foreach (var department in Departments)
+    {
+        <tr>
+            <th>@department.Name</th>
+            <td>
+                @Ideas.Where(i => i.User.Department.Id == department.Id).Count()
+            </td>
+        </tr>
+    }
+</table>

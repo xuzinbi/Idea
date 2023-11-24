@@ -1,0 +1,87 @@
+﻿@model Idea.Models.NIdea
+
+@{
+    ViewData["Title"] = "Details";
+
+    var Comments = (List<Comment>)ViewData["Comments"];
+    var isComment = (int)ViewData["isComment"];
+}
+
+<h1>Details</h1>
+
+@if (isComment == 1)
+{
+    <div class="text-success my-3">
+        The system just sent an email to the owner of this idea (@Model.User.Email).
+    </div>
+}
+
+<div>
+    <h4>NIdea</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Brief)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Brief)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FilePath)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FilePath)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.View)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.View)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Submission)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Submission.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+    </dl>
+</div>
+
+@if (Model.Submission.Deadline_2 >= DateTime.Now)
+{
+    <form class="input-group mb-3" asp-action="Comment">
+        <input type="hidden" name="IdeaId" value="@Model.Id" />
+        <input type="text" class="form-control" placeholder="Comment" name="Content">
+        <button class="btn btn-outline-success" type="submit">Comment</button>
+    </form>
+}
+
+@foreach (var comment in Comments)
+{
+    <hr />
+    <div>(@comment.Created_Date) - @comment.Content</div>
+}
+
+<hr />
+
+<div>
+    <a asp-action="ViewIdeas" asp-route-submissionid="@Model.SubmissionId">Back to List</a>
+</div>

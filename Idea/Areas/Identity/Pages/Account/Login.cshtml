@@ -1,0 +1,113 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" id="input-username" />
+                    <label asp-for="Input.Email" class="form-label"></label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" id="input-password" />
+                    <label asp-for="Input.Password" class="form-label"></label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div>
+                    <div class="checkbox mb-3">
+                        <label asp-for="Input.RememberMe" class="form-label">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-success mb-3">Log in</button>
+                </div>
+                <div>
+                    <p>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <table class="table">
+                <tr class="bg-success text-light">
+                    <td colspan="3">Accounts</td>
+                </tr>
+                <tr>
+                    <td>Admin</td>
+                    <td id="sample-admin">admin@test.com</td>
+                    <td align="right"><button id="btn-admin" class="btn btn-sm btn-outline-secondary">Copy</button></td>
+                </tr>
+                <tr>
+                    <td>Manager</td>
+                    <td id="sample-manager">manager@test.com</td>
+                    <td align="right"><button id="btn-manager" class="btn btn-sm btn-outline-secondary">Copy</button></td>
+                </tr>
+                <tr>
+                    <td>Staff 01</td>
+                    <td id="sample-staff-01">staff_01@test.com</td>
+                    <td align="right"><button id="btn-staff-01" class="btn btn-sm btn-outline-secondary">Copy</button></td>
+                </tr>
+                <tr>
+                    <td>Staff 02</td>
+                    <td id="sample-staff-02">staff_02@test.com</td>
+                    <td align="right"><button id="btn-staff-02" class="btn btn-sm btn-outline-secondary">Copy</button></td>
+                </tr>
+                <tr class="bg-success text-light">
+                    <td colspan="3">Password</td>
+                </tr>
+                <tr>
+                    <td colspan="2" id="sample-password">abcABC@123</td>
+                    <td align="right"><button id="btn-password" class="btn btn-sm btn-outline-secondary">Copy</button></td>
+                </tr>
+            </table>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script>
+    var input_username = document.getElementById("input-username");
+    var input_password = document.getElementById("input-password");
+
+    var password = document.getElementById("btn-password");
+    var admin = document.getElementById("btn-admin");
+    var manager = document.getElementById("btn-manager");
+    var staff_01 = document.getElementById("btn-staff-01");
+    var staff_02 = document.getElementById("btn-staff-02");
+
+    password.addEventListener("click", function () {
+        input_password.setAttribute('value', document.getElementById("sample-password").textContent);
+    });
+
+    admin.addEventListener("click", function () {
+        input_username.setAttribute('value', document.getElementById("sample-admin").textContent);
+    });
+
+    manager.addEventListener("click", function () {
+        input_username.setAttribute('value', document.getElementById("sample-manager").textContent);
+    });
+
+    staff_01.addEventListener("click", function () {
+        input_username.setAttribute('value', document.getElementById("sample-staff-01").textContent);
+    });
+
+    staff_02.addEventListener("click", function () {
+        input_username.setAttribute('value', document.getElementById("sample-staff-02").textContent);
+    });
+</script>

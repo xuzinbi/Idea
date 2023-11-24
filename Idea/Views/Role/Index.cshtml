@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{
+    ViewData["Title"] = "Role Index";
+}
+
+<div class="text-center mt-4">
+    <a class="btn btn-success" asp-action="Create">Create New</a>
+</div>
+
+<table class="table text-center">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Id)</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm rounded-0">
+                    <span class='material-icons fs-6'>remove</span>
+                </a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm rounded-0">
+                    <span class="material-icons fs-6">edit</span>
+                </a>
+            </td>
+        </tr>
+    }
+</table>
